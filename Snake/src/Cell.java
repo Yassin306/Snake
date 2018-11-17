@@ -11,7 +11,7 @@ public abstract class Cell {
 	private int y;
 	private int score;
 	public enum CellType{
-		ITEM,WALL,SNAKE_BODY,SNAKE_HEAD
+		ITEM,WALL,SNAKE_BODY,SNAKE_HEAD,EMPTY
 	}
 	private CellType cellType;
 	
