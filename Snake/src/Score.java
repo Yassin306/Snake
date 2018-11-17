@@ -11,10 +11,13 @@ public class Score {
 	private int duration;
 	private int userScore;
 	/**
-	 * 
+	 * sets the duration and the userScore to 0 as they represent the start of the game
+	 * sets the userName with the an user name
 	 */
-	public Score() {
-		// TODO Auto-generated constructor stub
+	public Score(String userName) {
+		this.userName = userName;
+		duration = 0;
+		userScore = 0;
 	}
 	/**
 	 * @return the userName
@@ -51,6 +54,18 @@ public class Score {
 	 */
 	public void setUserScore(int userScore) {
 		this.userScore = userScore;
+	}
+	/**
+	 * add score to the userScore already saved
+	 */
+	public void addScore(int score) {
+		this.userScore += score;
+	}
+	/**
+	 * adds duration to the game duration already saved
+	 */
+	public void addDuration(int duration) {
+		this.duration += duration;
 	}
 
 }
