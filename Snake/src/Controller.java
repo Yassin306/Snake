@@ -1,4 +1,6 @@
-import com.sun.glass.events.KeyEvent;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
 
 /**
  * 
@@ -30,24 +32,23 @@ public class Controller extends KeyAdapter {
 		return direction;
 	}
 	
-	@Override
 	public void KeyPressed(KeyEvent key_press) {
 		
 		int key = key_press.getKeyCode();
 		
-		if (key == KeyEvent.VK_UP) {
+		if ((key == KeyEvent.VK_UP) && (direction != Direction.DOWN)) {
 			direction = Direction.UP;
 		}
 		
-		if (key == KeyEvent.VK_DOWN) {
+		if ((key == KeyEvent.VK_DOWN) && (direction != Direction.UP)) {
 			direction = Direction.DOWN;
 		}
 		
-		if (key == KeyEvent.VK_LEFT) {
+		if ((key == KeyEvent.VK_LEFT) && (direction != Direction.RIGHT)) {
 			direction = Direction.LEFT;
 		}
 		
-		if (key == KeyEvent.VK_RIGHT) {
+		if ((key == KeyEvent.VK_RIGHT) && (direction != Direction.LEFT)) {
 			direction = Direction.RIGHT;
 		}
 		
