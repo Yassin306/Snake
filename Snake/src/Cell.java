@@ -6,23 +6,24 @@
  * @author 
  *
  */
-public abstract class Cell {
-	private int x;
-	private int y;
+public class Cell {
 	private int score;
 	public enum CellType{
-		ITEM,WALL,SNAKE_BODY,SNAKE_HEAD,EMPTY
+		ITEM,WALL,EMPTY
 	}
 	private CellType cellType;
 	
 	/**
-	 * 
+	 * Sets the type of the cell and gives a score based on the type
 	 */
-	public Cell(int x, int y, int score, CellType cellType) {
-		this.x = x;
-		this.y = y;
-		this.score = score;
+	public Cell(CellType cellType) {
 		this.cellType = cellType;
+		if (this.cellType == CellType.ITEM) {
+			this.score = 100;
+		}
+		else {
+			this.score = 0;
+		}
 	}
 
 	/**
@@ -33,38 +34,10 @@ public abstract class Cell {
 	}
 
 	/**
-	 * @param x the x to set
-	 */
-	public void setX(int x) {
-		this.x = x;
-	}
-
-	/**
-	 * @param y the y to set
-	 */
-	public void setY(int y) {
-		this.y = y;
-	}
-
-	/**
 	 * @param score the score to set
 	 */
 	public void setScore(int score) {
 		this.score = score;
-	}
-
-	/**
-	 * @return the x
-	 */
-	public int getX() {
-		return x;
-	}
-
-	/**
-	 * @return the y
-	 */
-	public int getY() {
-		return y;
 	}
 
 	/**
