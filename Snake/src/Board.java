@@ -64,6 +64,14 @@ public class Board {
 		this.snakeBody.addFirst(snake);
 	}
 	
+	/**
+	 * @return the head of the snake
+	 * 
+	 */
+	public Snake getHead() {
+		return this.snakeBody.getFirst();
+	}
+	
 
 	/**
 	 * sets the type of the cell
