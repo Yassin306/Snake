@@ -84,18 +84,22 @@ public class Board {
 		case UP:
 			e = new Snake(pos_x, pos_y + 1);
 			this.snakeBody.addLast(e);
+			cells[pos_x][pos_y + 1].setCellType(Cell.CellType.SNAKE);
 			break;
 		case DOWN:
 			e = new Snake(pos_x, pos_y - 1);
 			this.snakeBody.addLast(e);
+			cells[pos_x][pos_y - 1].setCellType(Cell.CellType.SNAKE);
 			break;
 		case LEFT:
 			e = new Snake(pos_x + 1, pos_y);
 			this.snakeBody.addLast(e);
+			cells[pos_x + 1][pos_y].setCellType(Cell.CellType.SNAKE);
 			break;
 		case RIGHT:
 			e = new Snake(pos_x - 1, pos_y);
 			this.snakeBody.addLast(e);
+			cells[pos_x - 1][pos_y].setCellType(Cell.CellType.SNAKE);
 			break;
 		}
 		
@@ -133,6 +137,12 @@ public class Board {
 			}
 
 		}		
+	}
+	
+	public void update() {
+		int x = snakeBody.getLast().getX();
+		int y = snakeBody.getLast().getY();
+		cells[x][y].setCellType(Cell.CellType.EMPTY);
 	}
 
 	
