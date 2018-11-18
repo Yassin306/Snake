@@ -1,4 +1,8 @@
-import java.awt.event.KeyAdapter;
+import java.awt.event.KeyListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
 import java.awt.event.KeyEvent;
 
 
@@ -10,11 +14,12 @@ import java.awt.event.KeyEvent;
  * @author 
  *
  */
-public class Controller extends KeyAdapter {
+public class Controller extends JFrame implements KeyListener {
 	public enum Direction{
 		UP,DOWN,LEFT,RIGHT
 	}
 	private Direction direction;
+	private JButton bAceptar;
 	
 	/**
 	 * 
@@ -22,8 +27,21 @@ public class Controller extends KeyAdapter {
 	
 	
 	public Controller() {
-		// TODO Auto-generated constructor stub
+		  add(getbAceptar());
+		  //inicializador();
 	}
+	
+	 /**private void inicializador() {
+		 
+		  setLayout(null);
+		  setTitle("Prueba con Teclas");
+		  setVisible(true);
+		  setSize(300, 300);
+		  setLocationRelativeTo(null);
+		  setDefaultCloseOperation(EXIT_ON_CLOSE);
+		 
+		 }
+		 */
 
 	/**
 	 * @return the direction
@@ -32,7 +50,14 @@ public class Controller extends KeyAdapter {
 		return direction;
 	}
 	
-	public void KeyPressed(KeyEvent key_press) {
+	private JButton getbAceptar() {
+		 bAceptar = new JButton();
+		 bAceptar.addKeyListener(this);
+		 return bAceptar;
+	}
+	
+	@Override
+	public void keyPressed(KeyEvent key_press) {
 		
 		int key = key_press.getKeyCode();
 		
@@ -50,7 +75,19 @@ public class Controller extends KeyAdapter {
 		
 		if ((key == KeyEvent.VK_RIGHT) && (direction != Direction.LEFT)) {
 			direction = Direction.RIGHT;
-		}
+		}	
+		
+	}
+
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
 		
 	}
 
