@@ -50,12 +50,19 @@ public class Controller extends JFrame implements KeyListener {
 		return direction;
 	}
 	
+	/**
+	 * @return the pressed button
+	 */
 	private JButton getbAceptar() {
 		 bAceptar = new JButton();
 		 bAceptar.addKeyListener(this);
 		 return bAceptar;
 	}
 	
+	/**
+	 * Override the keyPressed function from KeyListener class
+	 * set the direction depending on the pressed key.
+	 */
 	@Override
 	public void keyPressed(KeyEvent key_press) {
 		
@@ -79,12 +86,18 @@ public class Controller extends JFrame implements KeyListener {
 		
 	}
 
+	/**
+	 * default keyReleased function from KeyListener class
+	 */
 	@Override
 	public void keyReleased(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 
+	/**
+	 * default keyTyped function from KeyListener class
+	 */
 	@Override
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
