@@ -8,14 +8,13 @@
  */
 public class Score {
 	private String userName;
-	private int duration;
+	private long duration;
 	private int userScore;
 	/**
 	 * sets the duration and the userScore to 0 as they represent the start of the game
 	 * sets the userName with the an user name
 	 */
-	public Score(String userName) {
-		this.userName = userName;
+	public Score() {
 		duration = 0;
 		userScore = 0;
 	}
@@ -28,7 +27,7 @@ public class Score {
 	/**
 	 * @return the duration
 	 */
-	public int getDuration() {
+	public long getDuration() {
 		return duration;
 	}
 	/**
@@ -46,7 +45,7 @@ public class Score {
 	/**
 	 * @param duration the duration to set
 	 */
-	public void setDuration(int duration) {
+	public void setDuration(long duration) {
 		this.duration = duration;
 	}
 	/**

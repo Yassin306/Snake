@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 /**
  * 
  */
@@ -8,8 +10,13 @@
  */
 public class Game {
 	private Board board;
-	int rowSize;
-	int colSize;
+	private int rowSize;
+	private int colSize;
+	private Controller con = new Controller();
+	private Score score = new Score();
+	private static final int OBJECTIVE_SCORE= 10;
+	private long startTime;
+	private long finishTime;
 	
 	public Game(int rowSize, int colSize) {
 		this.rowSize = rowSize;
@@ -24,10 +31,19 @@ public class Game {
 		board = new Board(rowSize, colSize);
 		board.setHead((int) (rowSize/2), (int) (colSize/2));
 		board.setCells((int)(Math.random() * rowSize), (int)(Math.random() * colSize), Cell.CellType.ITEM);
-		play();
+		startTime = System.currentTimeMillis();
+		play(con.getDirection());
 	}
 	
-	public void play() {
+	public void play(Controller.Direction direction) {
+		do {
+			CheckObjective(direction);
+			
+			board.move(direction);
+			board.update();
+			
+		} while(CheckCollision(direction));
+		GameOver();
 		
 	}
 	
@@ -76,24 +92,28 @@ public class Game {
 			if (board.getCell(pos_X, pos_Y - 1) == Cell.CellType.ITEM) {
 				board.addBody(direction);
 				NewObjective();
+				score.addScore(OBJECTIVE_SCORE);
 			}
 			break;
 		case DOWN:
 			if (board.getCell(pos_X, pos_Y + 1) == Cell.CellType.ITEM) {
 				board.addBody(direction);
 				NewObjective();
+				score.addScore(OBJECTIVE_SCORE);
 			}
 			break;
 		case LEFT:
 			if (board.getCell(pos_X - 1, pos_Y) == Cell.CellType.ITEM) {
 				board.addBody(direction);
 				NewObjective();
+				score.addScore(OBJECTIVE_SCORE);
 			}
 			break;
 		case RIGHT:
 			if (board.getCell(pos_X + 1, pos_Y) == Cell.CellType.ITEM) {
 				board.addBody(direction);
 				NewObjective();
+				score.addScore(OBJECTIVE_SCORE);
 			}
 			break;
 		}
@@ -111,5 +131,15 @@ public class Game {
 		} else {
 			NewObjective();
 		}
+	}
+	
+	public void GameOver() {
+		String userName;
+		long Time = finishTime - startTime;
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter your name:");
+		userName = sc.nextLine();
+		score.setUserName(userName);
+		score.setDuration(Time);
 	}
 }
