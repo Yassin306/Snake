@@ -9,7 +9,7 @@
 public class Cell {
 	private int score;
 	public enum CellType{
-		ITEM,WALL,EMPTY
+		ITEM,WALL,EMPTY,SNAKE
 	}
 	private CellType cellType;
 	

@@ -1,3 +1,5 @@
+import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  * 
@@ -11,6 +13,7 @@ public class Board {
 	private int rowSize;
 	private int colSize;
 	private Cell[][] cells;
+  	private LinkedList<Snake> snakeBody = new LinkedList<Snake>();
 	/**
 	 * Generates an array of Cell with size: rowSize+1*colSize+1 so
 	 * we can add the borders
@@ -29,6 +32,7 @@ public class Board {
 					cells[i][j] = new Cell(Cell.CellType.EMPTY);
 			}
 		}
+
 	}
 	/**
 	 * @return the rowSize
@@ -50,6 +54,49 @@ public class Board {
 		return cells[x][y].getCellType();
 	}
 	
+	/**
+	 * sets a snake head and set the cell where its located
+	 * 
+	 */
+	public void setHead(int x, int y) {
+		Snake snake = new Snake(x,y);
+		cells[x][y].setCellType(Cell.CellType.SNAKE);
+		this.snakeBody.addFirst(snake);
+	}
+	
+
+	/**
+	 * sets the type of the cell
+	 */
+	public void setCells(int x, int y, Cell.CellType cellType) {
+		this.cells[x][y].setCellType(cellType);;
+	}
+	/**
+	 * 
+	 */
+	public void move(Controller.Direction direction) {
+		int x,y;
+		for (Iterator<Snake> iterator = snakeBody.iterator(); iterator.hasNext();) {
+			Snake snake = iterator.next();
+			x = snake.getX();
+			y = snake.getY();
+			switch (direction) {
+			case UP:
+				snake.setPos(x, y-1);
+				break;
+			case DOWN:
+				snake.setPos(x, y+1);
+				break;
+			case LEFT:
+				snake.setPos(x-1, y);
+				break;
+			case RIGHT:
+				snake.setPos(x+1, y);
+				break;
+			}
+
+		}		
+	}
 
 	
 }
