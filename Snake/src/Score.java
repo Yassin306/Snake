@@ -17,6 +17,7 @@ public class Score {
 	public Score() {
 		duration = 0;
 		userScore = 0;
+		userName = "";
 	}
 	/**
 	 * @return the userName
@@ -40,7 +41,14 @@ public class Score {
 	 * @param userName the userName to set
 	 */
 	public void setUserName(String userName) {
-		this.userName = userName;
+		if(userName.matches("[a-zA-Z0-9]*")) {
+			if(userName.length()<7)
+				this.userName = userName;
+			else
+				this.userName =  userName.substring(0, 6);
+		}
+		else
+			this.userName = "_";
 	}
 	/**
 	 * @param duration the duration to set

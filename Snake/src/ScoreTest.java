@@ -30,55 +30,99 @@ class ScoreTest {
 	void testScore() {
 		assertTrue(0 == score.getDuration());
 		assertTrue(0 == score.getUserScore());
-		assertTrue("" == score.getUserName());
+		assertEquals("", score.getUserName());
 	}
 
 	/**
 	 * Test method for {@link Score#getUserName()}.
+	 * Black case testing
+	 * 
 	 */
 	@Test
 	void testGetUserName() {
-		fail("Not yet implemented");
+		score.setUserName("user");
+		assertEquals("user", score.getUserName());
+		score.setUserName("user2");
+		assertEquals("user2", score.getUserName());
+
 	}
 
 	/**
 	 * Test method for {@link Score#getDuration()}.
+	 * Black case testing
 	 */
 	@Test
 	void testGetDuration() {
-		fail("Not yet implemented");
+		score.setDuration(50);
+		assertTrue((long)50 == score.getDuration());
+		score.setDuration(60);
+		assertTrue((long)60 == score.getDuration());
 	}
 
 	/**
 	 * Test method for {@link Score#getUserScore()}.
+	 * Black case testing
 	 */
 	@Test
 	void testGetUserScore() {
-		fail("Not yet implemented");
+		score.setUserScore(50);
+		assertTrue(50 == score.getUserScore());
+		score.setUserScore(60);
+		assertTrue(60 == score.getUserScore());
 	}
 
 	/**
 	 * Test method for {@link Score#setUserName(java.lang.String)}.
+	 * Black case test: equivalence partitioning, limit and frontier values
 	 */
 	@Test
 	void testSetUserName() {
-		fail("Not yet implemented");
-	}
+		//valors interiors
+		score.setUserName("user"); 
+		assertEquals("user",score.getUserName());
+		score.setUserName("1234");
+		assertEquals("1234",score.getUserName());
+		score.setUserName("user5");
+		assertEquals("user5",score.getUserName());
+		//valors exteriors
+		score.setUserName("user567");		
+		assertEquals("user56", score.getUserName());
+		score.setUserName("1234567");
+		assertEquals("123456",score.getUserName());
+		score.setUserName("userrrr");
+		assertEquals("userrr",score.getUserName());
+		//valors limit
+		score.setUserName("123456");
+		assertEquals("123456", score.getUserName());
+		score.setUserName("user56");
+		assertEquals("user56",score.getUserName());
+		//valors invalids
+		score.setUserName("use-56");//frontera
+		assertEquals("_",score.getUserName());
+		score.setUserName("use-567");//valor exterior
+		assertEquals("_", score.getUserName());
+		score.setUserName("use-5");//valor interior
+		assertEquals("_", score.getUserName());
+		}
 
 	/**
 	 * Test method for {@link Score#setDuration(long)}.
+	 * Black case testing
 	 */
 	@Test
 	void testSetDuration() {
-		fail("Not yet implemented");
+		score.setDuration(50);
+		assertTrue((long)50 == score.getDuration());
 	}
 
 	/**
 	 * Test method for {@link Score#setUserScore(int)}.
+	 * Black case testing
 	 */
 	@Test
 	void testSetUserScore() {
-		fail("Not yet implemented");
+		score.setUserScore(50);
+		assertTrue(50 == score.getUserScore());
 	}
 
 	/**
@@ -86,7 +130,10 @@ class ScoreTest {
 	 */
 	@Test
 	void testAddScore() {
-		fail("Not yet implemented");
+		score.setUserScore(50);
+		score.addScore(10);
+		assertTrue(60 == score.getUserScore());
+		
 	}
 
 	/**
@@ -94,7 +141,9 @@ class ScoreTest {
 	 */
 	@Test
 	void testAddDuration() {
-		fail("Not yet implemented");
+		score.setDuration(50);
+		score.addDuration(10);
+		assertTrue(60 == score.getDuration());
 	}
 
 }
