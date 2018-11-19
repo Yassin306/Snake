@@ -17,21 +17,7 @@ public class Board extends JPanel {
 	private Board.Direction direction = Board.Direction.UP;
 	public enum Direction{
 		UP,DOWN,LEFT,RIGHT
-	}
-	/**
-	 * @return the direction
-	 */
-	public Direction getDirection() {
-		return direction;
-	}
-	
-	/**
-	 * @param direction the direction to set
-	 */
-	public void setDirection(Direction direction) {
-		this.direction = direction;
-	}
-	
+	}	
 	private int rowSize;
 	private int colSize;
 	private Cell[][] cells;
@@ -110,7 +96,19 @@ public class Board extends JPanel {
 	public Snake getHead() {
 		return this.snakeBody.getFirst();
 	}
+	/**
+	 * @return the direction
+	 */
+	public Direction getDirection() {
+		return direction;
+	}
 	
+	/**
+	 * @param direction the direction to set
+	 */
+	public void setDirection(Direction direction) {
+		this.direction = direction;
+	}
 	/**
 	 * Add one more member to the body of the snake
 	 * 

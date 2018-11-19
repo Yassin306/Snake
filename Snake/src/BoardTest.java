@@ -143,17 +143,20 @@ class BoardTest {
 	void testMove() {
 		int x = board.getHead().getX();
 		int y = board.getHead().getY();
-	
-		board.move(Controller.Direction.UP);
+		board.setDirection(Board.Direction.UP);
+		board.move();
 		assertEquals(y - 1, board.getHead().getY());
 		assertEquals(board.getCell(x, y - 1), Cell.CellType.SNAKE);
-		board.move(Controller.Direction.DOWN);
+		board.setDirection(Board.Direction.DOWN);
+		board.move();
 		assertEquals(y + 1, board.getHead().getY());
 		assertEquals(board.getCell(x, y + 1), Cell.CellType.SNAKE);
-		board.move(Controller.Direction.LEFT);
+		board.setDirection(Board.Direction.LEFT);
+		board.move();
 		assertEquals(x - 1, board.getHead().getX());
 		assertEquals(board.getCell(x - 1, y), Cell.CellType.SNAKE);
-		board.move(Controller.Direction.RIGHT);
+		board.setDirection(Board.Direction.RIGHT);
+		board.move();
 		assertEquals(x + 1, board.getHead().getX());
 		assertEquals(board.getCell(x + 1, y), Cell.CellType.SNAKE);
 	}
