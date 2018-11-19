@@ -79,7 +79,7 @@ class BoardTest {
 	 */
 	@Test
 	void testIsItem() {
-		board.setCells(2, 2, Cell.CellType.EMPTY);
+		/*board.setCells(2, 2, Cell.CellType.EMPTY);
 		assertFalse(board.isItem(2, 2));
 		board.setCells(2, 2, Cell.CellType.MED_ITEM);
 		assertTrue(board.isItem(2, 2));
@@ -88,7 +88,9 @@ class BoardTest {
 		assertTrue(board.isItem(2, 2));
 		board.setCells(2, 2, Cell.CellType.EMPTY);
 		board.setCells(2, 2, Cell.CellType.SMALL_ITEM);
-		assertTrue(board.isItem(2, 2));
+		assertTrue(board.isItem(2, 2));*/
+		fail("Not yet implemented");
+
 	}
 
 	/**
@@ -115,10 +117,10 @@ class BoardTest {
 	}
 
 	/**
-	 * Test method for {@link Board#addBody(Controller.Direction)}.
+	 * Test method for {@link Board#getTail()}.
 	 */
 	@Test
-	void testAddBody() {
+	void testGetTail() {
 		fail("Not yet implemented");
 	}
 
@@ -134,31 +136,41 @@ class BoardTest {
 
 	/**
 	 * Test method for {@link Board#move(Controller.Direction)}.
-	 * White test case
+	 * White test case: Decision coverage
 	 * Test the different movements that the snake can make
 	 * In each option the snake only move on an axis,
 	 * that why we only check one axis. 
 	 */
 	@Test
 	void testMove() {
+		board.setHead(2, 2);
 		int x = board.getHead().getX();
 		int y = board.getHead().getY();
+
 		board.setDirection(Board.Direction.UP);
 		board.move();
 		assertEquals(y - 1, board.getHead().getY());
+		assertEquals(x, board.getHead().getX());
 		assertEquals(board.getCell(x, y - 1), Cell.CellType.SNAKE);
+
 		board.setDirection(Board.Direction.DOWN);
 		board.move();
-		assertEquals(y + 1, board.getHead().getY());
-		assertEquals(board.getCell(x, y + 1), Cell.CellType.SNAKE);
+		assertEquals(y, board.getHead().getY());
+		assertEquals(x, board.getHead().getX());
+		assertEquals(board.getCell(x, y), Cell.CellType.SNAKE);
+
 		board.setDirection(Board.Direction.LEFT);
 		board.move();
 		assertEquals(x - 1, board.getHead().getX());
+		assertEquals(y, board.getHead().getY());
 		assertEquals(board.getCell(x - 1, y), Cell.CellType.SNAKE);
+
 		board.setDirection(Board.Direction.RIGHT);
 		board.move();
-		assertEquals(x + 1, board.getHead().getX());
-		assertEquals(board.getCell(x + 1, y), Cell.CellType.SNAKE);
+		assertEquals(x, board.getHead().getX());
+		assertEquals(y, board.getHead().getY());
+		assertEquals(board.getCell(x, y), Cell.CellType.SNAKE);
+
 	}
 
 	/**
