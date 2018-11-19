@@ -24,8 +24,8 @@ public class Board extends JPanel {
 	 * initializes the array with empty cells and borders
 	 */
 	public Board(int rowSize, int colSize) {
-		this.rowSize = rowSize+1;
-		this.colSize = colSize+1;
+		this.rowSize = rowSize+2;
+		this.colSize = colSize+2;
 		this.cells = new Cell[this.rowSize][this.colSize];
 		
 		for (int i = 0; i < this.rowSize; i++) {
@@ -138,31 +138,31 @@ public class Board extends JPanel {
 	 */
 	public void move(Controller.Direction direction) {
 		int x,y;
-		for (Iterator<Snake> iterator = snakeBody.iterator(); iterator.hasNext();) {
-			Snake snake = iterator.next();
-			x = snake.getX();
-			y = snake.getY();
-			switch (direction) {
-			case UP:
-				snake.setPos(x, y-1);
-				cells[x][y-1].setCellType(Cell.CellType.SNAKE);
-				break;
-			case DOWN:
-				snake.setPos(x, y+1);
-				cells[x][y+1].setCellType(Cell.CellType.SNAKE);
-				break;
-			case LEFT:
-				snake.setPos(x-1, y);
-				cells[x-1][y].setCellType(Cell.CellType.SNAKE);
-				break;
-			case RIGHT:
-				snake.setPos(x+1, y);
-				cells[x+1][y].setCellType(Cell.CellType.SNAKE);
-				break;
+		x = snakeBody.getFirst().getX();
+		y = snakeBody.getFirst().getY();
+		switch (direction) {
+		case UP:
+			System.out.println(cells[x][y-1].getCellType());
+			snakeBody.getFirst().setPos(x, y-1);
+			cells[x][y-1].setCellType(Cell.CellType.SNAKE);
+			System.out.println(cells[x][y-1].getCellType());
+			break;
+		case DOWN:
+			snakeBody.getFirst().setPos(x, y+1);
+			cells[x][y+1].setCellType(Cell.CellType.SNAKE);
+			break;
+		case LEFT:
+			snakeBody.getFirst().setPos(x-1, y);
+			cells[x-1][y].setCellType(Cell.CellType.SNAKE);
+			break;
+		case RIGHT:
+			snakeBody.getFirst().setPos(x+1, y);
+			cells[x+1][y].setCellType(Cell.CellType.SNAKE);
+			break;
 			}
 
 		}		
-	}
+	
 	
 	public void update() {
 		int x = snakeBody.getLast().getX();

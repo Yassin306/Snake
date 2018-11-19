@@ -44,7 +44,7 @@ public class Game extends JFrame {
 		
 		add(board, BorderLayout.CENTER);
 		
-		setSize(board.getColSize() * 20, board.getRowSize() * 20);
+		setSize(board.getColSize() * 22, board.getRowSize() * 22);
 		setLocationRelativeTo(null);
 		setVisible(true);
 		
@@ -59,8 +59,9 @@ public class Game extends JFrame {
 						
 			CheckObjective(direction);
 			
-			board.move(direction);
 			board.update();
+			board.move(direction);
+			
 			
 		} while(CheckCollision(direction));
 		GameOver();
