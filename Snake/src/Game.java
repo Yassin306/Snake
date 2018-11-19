@@ -133,7 +133,7 @@ public class Game extends JFrame implements KeyListener {
 		int pos_x = (int)(Math.random() * rowSize);
 		int pos_y = (int)(Math.random() * colSize);
 		if (board.getCell(pos_x, pos_y) != Cell.CellType.SNAKE
-				|| board.getCell(pos_x, pos_y) != Cell.CellType.WALL) {
+				&& board.getCell(pos_x, pos_y) != Cell.CellType.WALL) {
 			board.setCells(pos_x, pos_y, randomItem());
 		} else {
 			NewObjective();
@@ -239,5 +239,17 @@ public class Game extends JFrame implements KeyListener {
 	public void keyTyped(KeyEvent arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public int getScore() {
+		return score.getUserScore();
+	}
+	
+	public long getDuration() {
+		return score.getDuration();
+	}
+	
+	public String getName() {
+		return score.getUserName();
 	}
 }
