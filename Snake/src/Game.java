@@ -1,6 +1,13 @@
 import java.awt.BorderLayout;
 import java.util.Scanner;
+
+import javax.swing.JButton;
 import javax.swing.JFrame;
+
+import java.awt.event.KeyListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import javax.swing.JButton;
 
 /**
  * 
@@ -10,19 +17,22 @@ import javax.swing.JFrame;
  * @author 
  *
  */
-public class Game extends JFrame {
+public class Game extends JFrame implements KeyListener {
 	private Board board;
 	private int rowSize;
 	private int colSize;
-	private Controller con = new Controller();
+	private Controller.Direction direction;
 	private Score score = new Score();
 	private static final int OBJECTIVE_SCORE= 10;
 	private long startTime;
 	private long finishTime;
+	private JButton bAceptar;
 	
-	public Game(int rowSize, int colSize) throws InterruptedException {
+	public Game(int rowSize, int colSize) {
 		this.rowSize = rowSize;
 		this.colSize = colSize;
+		this.direction = Controller.Direction.UP;
+		add(getbAceptar());
 		start();
 		
 		
@@ -32,7 +42,7 @@ public class Game extends JFrame {
 	 * Game start
 	 * @throws InterruptedException 
 	 */
-	public void start() throws InterruptedException {
+	public void start() {
 		board = new Board(rowSize, colSize);
 		board.setHead((int) (rowSize/2), (int) (colSize/2));
 		NewObjective();
@@ -45,15 +55,24 @@ public class Game extends JFrame {
 		add(board, BorderLayout.CENTER);
 		
 		setSize(board.getColSize() * 22, board.getRowSize() * 22);
+		
+		
 		setLocationRelativeTo(null);
 		setVisible(true);
 		
-		play(con.getDirection());
+		
+		
+		play(direction);
 	}
 	
-	public void play(Controller.Direction direction) throws InterruptedException {
+	public void play(Controller.Direction direction) {
 		do {
-			Thread.sleep(1000);
+			try {
+				Thread.sleep(1000);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			
 					
 			board.repaint();
 						
@@ -82,17 +101,17 @@ public class Game extends JFrame {
 			}
 			break;
 		case DOWN:
-			if (board.getCell(pos_X, pos_Y + 1) == Cell.CellType.WALL) {
+			if (board.getCell(pos_X, pos_Y + 1) != Cell.CellType.WALL) {
 				collision = true;
 			}
 			break;
 		case LEFT:
-			if (board.getCell(pos_X - 1, pos_Y) == Cell.CellType.WALL) {
+			if (board.getCell(pos_X - 1, pos_Y) != Cell.CellType.WALL) {
 				collision = true;
 			}
 			break;
 		case RIGHT:
-			if (board.getCell(pos_X + 1, pos_Y) == Cell.CellType.WALL) {
+			if (board.getCell(pos_X + 1, pos_Y) != Cell.CellType.WALL) {
 				collision = true;
 			}
 			break;
@@ -183,5 +202,59 @@ public class Game extends JFrame {
 		userName = sc.nextLine();
 		score.setUserName(userName);
 		score.setDuration(Time);
+	}
+	
+	/**
+	 * @return the pressed button
+	 */
+	private JButton getbAceptar() {
+		 bAceptar = new JButton();
+		 bAceptar.addKeyListener(this);
+		 return bAceptar;
+	}
+	
+	/**
+	 * Override the keyPressed function from KeyListener class
+	 * set the direction depending on the pressed key.
+	 */
+	@Override
+	public void keyPressed(KeyEvent key_press) {
+		
+		int key = key_press.getKeyCode();
+		
+		if ((key == KeyEvent.VK_UP) && (direction != Controller.Direction.DOWN)) {
+			direction = Controller.Direction.UP;
+		}
+		
+		if ((key == KeyEvent.VK_DOWN) && (direction != Controller.Direction.UP)) {
+			direction = Controller.Direction.DOWN;
+		}
+		
+		if ((key == KeyEvent.VK_LEFT) && (direction != Controller.Direction.RIGHT)) {
+			direction = Controller.Direction.LEFT;
+		}
+		
+		if ((key == KeyEvent.VK_RIGHT) && (direction != Controller.Direction.LEFT)) {
+			direction = Controller.Direction.RIGHT;
+		}	
+		
+	}
+
+	/**
+	 * default keyReleased function from KeyListener class
+	 */
+	@Override
+	public void keyReleased(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	/**
+	 * default keyTyped function from KeyListener class
+	 */
+	@Override
+	public void keyTyped(KeyEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
