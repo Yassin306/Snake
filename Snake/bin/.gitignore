@@ -11,3 +11,6 @@
 /SnakeTest.class
 /mainApp.class
 /Game$1.class
+/direction.class
+/Snake$Direction.class
+/Board$Direction.class

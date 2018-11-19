@@ -21,7 +21,6 @@ public class Game extends JFrame implements KeyListener {
 	private Board board;
 	private int rowSize;
 	private int colSize;
-	private Controller.Direction direction;
 	private Score score = new Score();
 	private static final int OBJECTIVE_SCORE= 10;
 	private long startTime;
@@ -31,11 +30,8 @@ public class Game extends JFrame implements KeyListener {
 	public Game(int rowSize, int colSize) {
 		this.rowSize = rowSize;
 		this.colSize = colSize;
-		this.direction = Controller.Direction.UP;
 		add(getbAceptar());
-		start();
-		
-		
+		start();		
 	}
 	
 	/**
@@ -62,10 +58,10 @@ public class Game extends JFrame implements KeyListener {
 		
 		
 		
-		play(direction);
+		play(board.getDirection());
 	}
 	
-	public void play(Controller.Direction direction) {
+	public void play(Board.Direction direction) {
 		do {
 			try {
 				Thread.sleep(1000);
@@ -79,7 +75,7 @@ public class Game extends JFrame implements KeyListener {
 			CheckObjective(direction);
 			
 			board.update();
-			board.move(direction);
+			board.move();
 			
 			
 		} while(CheckCollision(direction));
@@ -90,7 +86,7 @@ public class Game extends JFrame implements KeyListener {
 	/**
 	 * @return if the snake has collided or not
 	 */
-	public boolean CheckCollision(Controller.Direction direction) {
+	public boolean CheckCollision(Board.Direction direction) {
 		int pos_X = board.getHead().getX();
 		int pos_Y = board.getHead().getY();
 		boolean collision = false;
@@ -124,7 +120,7 @@ public class Game extends JFrame implements KeyListener {
 	 * look if the snake has collected the objective
 	 * and create a new Objective
 	 */
-	public void CheckObjective(Controller.Direction direction) {
+	public void CheckObjective(Board.Direction direction) {
 		int pos_X = board.getHead().getX();
 		int pos_Y = board.getHead().getY();
 		switch (direction) {
@@ -221,25 +217,42 @@ public class Game extends JFrame implements KeyListener {
 	public void keyPressed(KeyEvent key_press) {
 		
 		int key = key_press.getKeyCode();
+		Board.Direction direction;
 		
-		if ((key == KeyEvent.VK_UP) && (direction != Controller.Direction.DOWN)) {
-			direction = Controller.Direction.UP;
+		if ((key == KeyEvent.VK_UP) && (board.getDirection() != Board.Direction.DOWN)) {
+			System.out.println("UP");
+
+			direction = Board.Direction.UP;
+			board.setDirection(direction);
+
 		}
 		
-		if ((key == KeyEvent.VK_DOWN) && (direction != Controller.Direction.UP)) {
-			direction = Controller.Direction.DOWN;
+		if ((key == KeyEvent.VK_DOWN) && (board.getDirection()!= Board.Direction.UP)) {
+			System.out.println("DOWN");
+
+			direction = Board.Direction.DOWN;
+			board.setDirection(direction);
+
 		}
 		
-		if ((key == KeyEvent.VK_LEFT) && (direction != Controller.Direction.RIGHT)) {
-			direction = Controller.Direction.LEFT;
+		if ((key == KeyEvent.VK_LEFT) && (board.getDirection() != Board.Direction.RIGHT)) {
+			System.out.println("LEFT");
+
+			direction = Board.Direction.LEFT;
+			board.setDirection(direction);
+
 		}
 		
-		if ((key == KeyEvent.VK_RIGHT) && (direction != Controller.Direction.LEFT)) {
-			direction = Controller.Direction.RIGHT;
-		}	
+		if ((key == KeyEvent.VK_RIGHT) && (board.getDirection() != Board.Direction.LEFT)) {
+			System.out.println("RIGHT");
+
+			direction = Board.Direction.RIGHT;
+			board.setDirection(direction);
+
+		}
+		
 		
 	}
-
 	/**
 	 * default keyReleased function from KeyListener class
 	 */

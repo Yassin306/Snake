@@ -14,6 +14,24 @@ import java.awt.Dimension;
  *
  */
 public class Board extends JPanel {
+	private Board.Direction direction = Board.Direction.UP;
+	public enum Direction{
+		UP,DOWN,LEFT,RIGHT
+	}
+	/**
+	 * @return the direction
+	 */
+	public Direction getDirection() {
+		return direction;
+	}
+	
+	/**
+	 * @param direction the direction to set
+	 */
+	public void setDirection(Direction direction) {
+		this.direction = direction;
+	}
+	
 	private int rowSize;
 	private int colSize;
 	private Cell[][] cells;
@@ -97,7 +115,7 @@ public class Board extends JPanel {
 	 * Add one more member to the body of the snake
 	 * 
 	 */
-	public void addBody(Controller.Direction direction) {		
+	public void addBody(Board.Direction direction) {		
 		int pos_x = this.snakeBody.getLast().getX();
 		int pos_y = this.snakeBody.getLast().getY();
 		Snake e;
@@ -136,7 +154,7 @@ public class Board extends JPanel {
 	/**
 	 * 
 	 */
-	public void move(Controller.Direction direction) {
+	public void move() {
 		int x,y;
 		x = snakeBody.getFirst().getX();
 		y = snakeBody.getFirst().getY();
@@ -220,6 +238,7 @@ public class Board extends JPanel {
 			g.fillRect(x, y, 20, 20);
 			break;
 	}
-
+			
+} 	
 	
-} }
+}
