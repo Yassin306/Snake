@@ -1,7 +1,12 @@
 /Board.class
+/BoardTest.class
 /Cell$CellType.class
 /Cell.class
+/CellTest.class
 /Controller$Direction.class
 /Controller.class
+/Game.class
 /Score.class
+/Snake.class
+/SnakeTest.class
 /mainApp.class
