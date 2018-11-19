@@ -30,7 +30,7 @@ public class Game {
 	public void start() {
 		board = new Board(rowSize, colSize);
 		board.setHead((int) (rowSize/2), (int) (colSize/2));
-		board.setCells((int)(Math.random() * rowSize), (int)(Math.random() * colSize), Cell.CellType.ITEM);
+		NewObjective();
 		startTime = System.currentTimeMillis();
 		play(con.getDirection());
 	}
@@ -126,13 +126,34 @@ public class Game {
 	public void NewObjective() {
 		int pos_x = (int)(Math.random() * rowSize);
 		int pos_y = (int)(Math.random() * colSize);
-		if (board.getCell(pos_x, pos_y) != Cell.CellType.SNAKE) {
-			board.setCells(pos_x, pos_y, Cell.CellType.ITEM);
+		if (board.getCell(pos_x, pos_y) != Cell.CellType.SNAKE
+				|| board.getCell(pos_x, pos_y) != Cell.CellType.WALL) {
+			board.setCells(pos_x, pos_y, randomItem());
 		} else {
 			NewObjective();
 		}
 	}
 	
+	/**
+	 * create a new Objective
+	 * @return 
+	 * 
+	 */
+	public Cell.CellType randomItem() {
+		int Random = (int)(Math.random()*4);
+		if (Random == 0) {
+			return Cell.CellType.BIG_ITEM;
+		} else if (Random == 1) {
+			return Cell.CellType.MED_ITEM;
+		} else {
+			return Cell.CellType.SMALL_ITEM;
+		}
+	}
+	
+	/**
+	 * GameOver Screen
+	 * 
+	 */
 	public void GameOver() {
 		String userName;
 		long Time = finishTime - startTime;
