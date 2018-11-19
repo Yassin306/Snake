@@ -57,14 +57,19 @@ class CellTest {
 	@Test
 	void testSetCellType() {
 		empty.setCellType(Cell.CellType.SMALL_ITEM);
+		assertEquals(Cell.CellType.SMALL_ITEM, empty.getCellType());
 		assertTrue(30 == empty.getScore());
 		empty.setCellType(Cell.CellType.BIG_ITEM);
+		assertEquals(Cell.CellType.BIG_ITEM, empty.getCellType());
 		assertTrue(100 == empty.getScore());
 		empty.setCellType(Cell.CellType.MED_ITEM);
+		assertEquals(Cell.CellType.MED_ITEM, empty.getCellType());
 		assertTrue(50 == empty.getScore());
 		empty.setCellType(Cell.CellType.SNAKE);
+		assertEquals(Cell.CellType.SNAKE, empty.getCellType());
 		assertTrue(0 == empty.getScore());
 		wall.setCellType(Cell.CellType.EMPTY);
+		assertEquals(Cell.CellType.EMPTY, wall.getCellType());
 		assertTrue(10 == wall.getScore());
 	}
 
