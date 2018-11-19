@@ -36,6 +36,8 @@ class CellTest {
 
 	/**
 	 * Test method for {@link Cell#Cell(Cell.CellType)}.
+	 * Black case test: equivalence partitioning
+	 * Testing Constructor test case
 	 */
 	@Test
 	void testCell() {
@@ -53,6 +55,8 @@ class CellTest {
 
 	/**
 	 * Test method for {@link Cell#setCellType(Cell.CellType)}.
+	 * Black case test: equivalence partitioning
+	 * Testing setCellType test case
 	 */
 	@Test
 	void testSetCellType() {
@@ -75,6 +79,8 @@ class CellTest {
 
 	/**
 	 * Test method for {@link Cell#setScore(int)}.
+	 * Black case test: equivalence partitioning, limit and frontier values
+	 * Testing setScore test case
 	 */
 	@Test
 	void testSetScore() {
@@ -91,7 +97,7 @@ class CellTest {
 		empty.setScore(0);
 		assertEquals(Cell.CellType.WALL, empty.getCellType());
 		assertTrue(0 == empty.getScore());
-		
+		//testing values that should change the cell to a cell with EMPTY cellType and score=10
 		int[] emptyValues = {-50, -1, 1, 9, 10, 11, 29, 31, 49, 51, 99, 101, 5, 20, 40, 80 ,150};
 		for (int i = 0; i < emptyValues.length; i++) {
 			empty.setScore(emptyValues[i]);
@@ -104,11 +110,17 @@ class CellTest {
 
 	/**
 	 * Test method for {@link Cell#getScore()}.
+	 * Black case test
+	 * Testing getScore test case
 	 */
 	@Test
 	void testGetScore() {
-		fail("Not yet implemented");
-	}
+		assertTrue(10 == empty.getScore());
+		assertTrue(30 == small.getScore());
+		assertTrue(100 == big.getScore());
+		assertTrue(50 == med.getScore());
+		assertTrue(0 == snake.getScore());
+		}
 
 	/**
 	 * Test method for {@link Cell#getCellType()}.
