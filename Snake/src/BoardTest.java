@@ -85,17 +85,6 @@ class BoardTest {
 		assertFalse(board.isItem(Cell.CellType.EMPTY));
 		assertFalse(board.isItem(Cell.CellType.SNAKE));
 		assertFalse(board.isItem(Cell.CellType.WALL));
-		/*board.setCells(2, 2, Cell.CellType.EMPTY);
-		assertFalse(board.isItem(2, 2));
-		board.setCells(2, 2, Cell.CellType.MED_ITEM);
-		assertTrue(board.isItem(2, 2));
-		board.setCells(2, 2, Cell.CellType.EMPTY);
-		board.setCells(2, 2, Cell.CellType.BIG_ITEM);
-		assertTrue(board.isItem(2, 2));
-		board.setCells(2, 2, Cell.CellType.EMPTY);
-		board.setCells(2, 2, Cell.CellType.SMALL_ITEM);
-		assertTrue(board.isItem(2, 2));*/
-
 	}
 
 	/**

@@ -96,7 +96,7 @@ public class Board extends JPanel {
 		return this.snakeBody.getFirst();
 	}
 	/**
-	 * @return the head of the snake
+	 * @return the tail of the snake
 	 * 
 	 */
 	public Snake getTail() {
@@ -124,7 +124,10 @@ public class Board extends JPanel {
 		this.cells[x][y].setCellType(cellType);;
 	}
 	/**
-	 * 
+	 * Move the snake according the direction
+	 * The Snake only can through only one axis
+	 * that why we only change one value.
+	 * @return the type of cell that snake go on.
 	 */
 	public Cell.CellType move() {
 		int x,y, pos_x;
@@ -163,7 +166,11 @@ public class Board extends JPanel {
 
 		}		
 	
-	
+	/**
+	 * Remove the last square of the snake only if
+	 * the snake hasn't caught an object. Otherwise
+	 * a Snake element is added to de List.
+	 */
 	public void updateSnake(boolean obj) {
 		int x = snakeBody.getLast().getX();
 		int y = snakeBody.getLast().getY();
