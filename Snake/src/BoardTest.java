@@ -134,10 +134,28 @@ class BoardTest {
 
 	/**
 	 * Test method for {@link Board#move(Controller.Direction)}.
+	 * White test case
+	 * Test the different movements that the snake can make
+	 * In each option the snake only move on an axis,
+	 * that why we only check one axis. 
 	 */
 	@Test
 	void testMove() {
-		fail("Not yet implemented");
+		int x = board.getHead().getX();
+		int y = board.getHead().getY();
+	
+		board.move(Controller.Direction.UP);
+		assertEquals(y - 1, board.getHead().getY());
+		assertEquals(board.getCell(x, y - 1), Cell.CellType.SNAKE);
+		board.move(Controller.Direction.DOWN);
+		assertEquals(y + 1, board.getHead().getY());
+		assertEquals(board.getCell(x, y + 1), Cell.CellType.SNAKE);
+		board.move(Controller.Direction.LEFT);
+		assertEquals(x - 1, board.getHead().getX());
+		assertEquals(board.getCell(x - 1, y), Cell.CellType.SNAKE);
+		board.move(Controller.Direction.RIGHT);
+		assertEquals(x + 1, board.getHead().getX());
+		assertEquals(board.getCell(x + 1, y), Cell.CellType.SNAKE);
 	}
 
 	/**

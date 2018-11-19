@@ -142,7 +142,6 @@ public class Board extends JPanel {
 			Snake snake = iterator.next();
 			x = snake.getX();
 			y = snake.getY();
-			System.out.println(x + " + " + y);
 			switch (direction) {
 			case UP:
 				snake.setPos(x, y-1);
