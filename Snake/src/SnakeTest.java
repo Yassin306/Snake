@@ -72,10 +72,28 @@ class SnakeTest {
 
 	/**
 	 * Test method for {@link Snake#setPos(int, int)}.
+	 * Black case test: pairwise testing
+	 * Testing setPos testing case
 	 */
 	@Test
 	void testSetPos() {
-		fail("Not yet implemented");
+		snake1 = new Snake(5, 5);//Initialization
+		snake2 = new Snake(5, 5);
+		snake3 = new Snake(5, 5);
+		snake4 = new Snake(5, 5);
+		snake5 = new Snake(5, 5);
+		
+		snake1.setPos(-1, 1);//pairs
+		snake2.setPos(1, -1);
+		snake3.setPos(-1, -1);
+		snake4.setPos(1, 1);
+		snake5.setPos(0, 0);
+		
+		assertTrue(snake1.getX() == 0 && snake1.getY() == 0);
+		assertTrue(snake2.getX() == 0 && snake2.getY() == 0);
+		assertTrue(snake3.getX() == 0 && snake3.getY() == 0);
+		assertTrue(snake4.getX() == 1 && snake4.getY() == 1);
+		assertTrue(snake5.getX() == 0 && snake5.getY() == 0);
 	}
 
 }
