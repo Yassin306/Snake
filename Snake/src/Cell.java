@@ -64,6 +64,6 @@ public class Cell {
 	public CellType getCellType() {
 		return cellType;
 	}
-
+	
 
 }

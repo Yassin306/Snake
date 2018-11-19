@@ -55,6 +55,20 @@ public class Board {
 	}
 	
 	/**
+	 *  @return true if the cell is an item
+	 */
+	public boolean isItem(int x, int y) {
+		boolean isItem = false;
+		Cell.CellType cell = cells[x][y].getCellType();
+		if (cell == Cell.CellType.BIG_ITEM 
+				|| cell == Cell.CellType.MED_ITEM
+				|| cell == Cell.CellType.SMALL_ITEM) {
+			isItem = true;
+		}
+		return isItem;
+	}
+	
+	/**
 	 * sets a snake head and set the cell where its located
 	 * 
 	 */

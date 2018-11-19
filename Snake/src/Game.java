@@ -89,28 +89,28 @@ public class Game {
 		int pos_Y = board.getHead().getY();
 		switch (direction) {
 		case UP:
-			if (board.getCell(pos_X, pos_Y - 1) == Cell.CellType.ITEM) {
+			if (board.isItem(pos_X, pos_Y - 1)) {
 				board.addBody(direction);
 				NewObjective();
 				score.addScore(OBJECTIVE_SCORE);
 			}
 			break;
 		case DOWN:
-			if (board.getCell(pos_X, pos_Y + 1) == Cell.CellType.ITEM) {
+			if (board.isItem(pos_X, pos_Y + 1)) {
 				board.addBody(direction);
 				NewObjective();
 				score.addScore(OBJECTIVE_SCORE);
 			}
 			break;
 		case LEFT:
-			if (board.getCell(pos_X - 1, pos_Y) == Cell.CellType.ITEM) {
+			if (board.isItem(pos_X - 1, pos_Y)) {
 				board.addBody(direction);
 				NewObjective();
 				score.addScore(OBJECTIVE_SCORE);
 			}
 			break;
 		case RIGHT:
-			if (board.getCell(pos_X + 1, pos_Y) == Cell.CellType.ITEM) {
+			if (board.isItem(pos_X + 1, pos_Y)) {
 				board.addBody(direction);
 				NewObjective();
 				score.addScore(OBJECTIVE_SCORE);
