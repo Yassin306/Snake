@@ -82,9 +82,8 @@ public class Board extends JPanel {
 	/**
 	 *  @return true if the cell is an item
 	 */
-	public boolean isItem(int x, int y) {
+	public boolean isItem(Cell.CellType cell) {
 		boolean isItem = false;
-		Cell.CellType cell = cells[x][y].getCellType();
 		if (cell == Cell.CellType.BIG_ITEM 
 				|| cell == Cell.CellType.MED_ITEM
 				|| cell == Cell.CellType.SMALL_ITEM) {
@@ -154,38 +153,59 @@ public class Board extends JPanel {
 	/**
 	 * 
 	 */
-	public void move() {
-		int x,y;
+	public Cell.CellType move() {
+		int x,y, pos_x;
 		x = snakeBody.getFirst().getX();
 		y = snakeBody.getFirst().getY();
+		Snake snake;
+		Cell.CellType obj = null;
+		
+		System.out.println(snakeBody.size());
+		
 		switch (direction) {
 		case UP:
-			System.out.println(cells[x][y-1].getCellType());
-			snakeBody.getFirst().setPos(x, y-1);
+			snake = new Snake(x, y - 1);
+			snakeBody.addFirst(snake);
+			obj = getCell(snakeBody.getFirst().getX(), snakeBody.getFirst().getY());
 			cells[x][y-1].setCellType(Cell.CellType.SNAKE);
-			System.out.println(cells[x][y-1].getCellType());
 			break;
 		case DOWN:
-			snakeBody.getFirst().setPos(x, y+1);
+			snake = new Snake(x, y + 1);
+			snakeBody.addFirst(snake);
+			obj = getCell(snakeBody.getFirst().getX(), snakeBody.getFirst().getY());
 			cells[x][y+1].setCellType(Cell.CellType.SNAKE);
 			break;
 		case LEFT:
-			snakeBody.getFirst().setPos(x-1, y);
+			snake = new Snake(x - 1, y);
+			snakeBody.addFirst(snake);
+			obj = getCell(snakeBody.getFirst().getX(), snakeBody.getFirst().getY());
 			cells[x-1][y].setCellType(Cell.CellType.SNAKE);
 			break;
 		case RIGHT:
-			snakeBody.getFirst().setPos(x+1, y);
+			snake = new Snake(x + 1, y);
+			snakeBody.addFirst(snake);
+			obj = getCell(snakeBody.getFirst().getX(), snakeBody.getFirst().getY());
 			cells[x+1][y].setCellType(Cell.CellType.SNAKE);
 			break;
 			}
+		System.out.println(obj + " " + isItem(obj));
+		return obj;
 
 		}		
 	
 	
-	public void update() {
+	public void update_snake(boolean obj) {
 		int x = snakeBody.getLast().getX();
 		int y = snakeBody.getLast().getY();
-		cells[x][y].setCellType(Cell.CellType.EMPTY);
+		System.out.println(x + " " + y);
+		if (!obj) {
+			cells[x][y].setCellType(Cell.CellType.EMPTY);
+			snakeBody.removeLast();
+		} else {
+			Snake e = new Snake(x, y);
+			this.snakeBody.addLast(e);
+		}
+		
 	}
 	
 	@Override

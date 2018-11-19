@@ -1,13 +1,9 @@
 import java.awt.BorderLayout;
 import java.util.Scanner;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
-
 import java.awt.event.KeyListener;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import javax.swing.JButton;
 
 /**
  * 
@@ -62,23 +58,28 @@ public class Game extends JFrame implements KeyListener {
 	}
 	
 	public void play(Board.Direction direction) {
+		boolean obj = false;
+		Cell.CellType cell = null;
 		do {
 			try {
 				Thread.sleep(1000);
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
-			
-					
+							
 			board.repaint();
-						
-			CheckObjective(direction);
-			
-			board.update();
-			board.move();
 			
 			
-		} while(CheckCollision(direction));
+										
+			
+			cell = board.move();
+			obj = board.isItem(cell);
+			if (obj) {
+				NewObjective();
+			}
+			board.update_snake(obj);
+			
+		} while(cell != Cell.CellType.WALL && cell != Cell.CellType.SNAKE);
 		GameOver();
 		
 	}
@@ -120,39 +121,8 @@ public class Game extends JFrame implements KeyListener {
 	 * look if the snake has collected the objective
 	 * and create a new Objective
 	 */
-	public void CheckObjective(Board.Direction direction) {
-		int pos_X = board.getHead().getX();
-		int pos_Y = board.getHead().getY();
-		switch (direction) {
-		case UP:
-			if (board.isItem(pos_X, pos_Y - 1)) {
-				board.addBody(direction);
-				NewObjective();
-				score.addScore(OBJECTIVE_SCORE);
-			}
-			break;
-		case DOWN:
-			if (board.isItem(pos_X, pos_Y + 1)) {
-				board.addBody(direction);
-				NewObjective();
-				score.addScore(OBJECTIVE_SCORE);
-			}
-			break;
-		case LEFT:
-			if (board.isItem(pos_X - 1, pos_Y)) {
-				board.addBody(direction);
-				NewObjective();
-				score.addScore(OBJECTIVE_SCORE);
-			}
-			break;
-		case RIGHT:
-			if (board.isItem(pos_X + 1, pos_Y)) {
-				board.addBody(direction);
-				NewObjective();
-				score.addScore(OBJECTIVE_SCORE);
-			}
-			break;
-		}
+	public boolean CheckObjective(Board.Direction direction) {
+		return false;
 	}
 	
 	/**
@@ -220,7 +190,7 @@ public class Game extends JFrame implements KeyListener {
 		Board.Direction direction;
 		
 		if ((key == KeyEvent.VK_UP) && (board.getDirection() != Board.Direction.DOWN)) {
-			System.out.println("UP");
+			
 
 			direction = Board.Direction.UP;
 			board.setDirection(direction);
@@ -228,7 +198,7 @@ public class Game extends JFrame implements KeyListener {
 		}
 		
 		if ((key == KeyEvent.VK_DOWN) && (board.getDirection()!= Board.Direction.UP)) {
-			System.out.println("DOWN");
+			
 
 			direction = Board.Direction.DOWN;
 			board.setDirection(direction);
@@ -236,7 +206,7 @@ public class Game extends JFrame implements KeyListener {
 		}
 		
 		if ((key == KeyEvent.VK_LEFT) && (board.getDirection() != Board.Direction.RIGHT)) {
-			System.out.println("LEFT");
+			
 
 			direction = Board.Direction.LEFT;
 			board.setDirection(direction);
@@ -244,7 +214,7 @@ public class Game extends JFrame implements KeyListener {
 		}
 		
 		if ((key == KeyEvent.VK_RIGHT) && (board.getDirection() != Board.Direction.LEFT)) {
-			System.out.println("RIGHT");
+			
 
 			direction = Board.Direction.RIGHT;
 			board.setDirection(direction);
