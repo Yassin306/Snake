@@ -26,8 +26,7 @@ public class Game extends JFrame implements KeyListener {
 	public Game(int rowSize, int colSize) {
 		this.rowSize = rowSize;
 		this.colSize = colSize;
-		add(getbAceptar());
-		start();		
+		add(getbAceptar());		
 	}
 	
 	/**
@@ -74,6 +73,7 @@ public class Game extends JFrame implements KeyListener {
 			
 			cell = board.move();
 			obj = board.isItem(cell);
+			addScore(cell);
 			if (obj) {
 				NewObjective();
 			}
@@ -82,6 +82,26 @@ public class Game extends JFrame implements KeyListener {
 		} while(cell != Cell.CellType.WALL && cell != Cell.CellType.SNAKE);
 		GameOver();
 		
+	}
+	
+	public void addScore(Cell.CellType e) {
+		switch (e) {
+		case EMPTY:
+			score.addScore(10);			
+			break;
+		case SMALL_ITEM:
+			score.addScore(30);		
+			break;
+		case MED_ITEM:
+			score.addScore(50);			
+			break;
+		case BIG_ITEM:
+			score.addScore(100);		
+			break;	
+		default:
+			score.addScore(0);
+			break;
+		}
 	}
 	
 	/**
@@ -161,6 +181,7 @@ public class Game extends JFrame implements KeyListener {
 	 * 
 	 */
 	public void GameOver() {
+		finishTime = System.currentTimeMillis();
 		String userName;
 		long Time = finishTime - startTime;
 		Scanner sc = new Scanner(System.in);

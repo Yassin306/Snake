@@ -124,8 +124,7 @@ public class Board extends JPanel {
 		this.cells[x][y].setCellType(cellType);;
 	}
 	/**
-	 * moves the snake based on the direction
-	 * which means adding a new head
+	 * 
 	 */
 	public Cell.CellType move() {
 		int x,y, pos_x;
@@ -133,8 +132,6 @@ public class Board extends JPanel {
 		y = snakeBody.getFirst().getY();
 		Snake snake;
 		Cell.CellType obj = null;
-		
-		System.out.println(snakeBody.size());
 		
 		switch (direction) {
 		case UP:
@@ -162,18 +159,14 @@ public class Board extends JPanel {
 			cells[x+1][y].setCellType(Cell.CellType.SNAKE);
 			break;
 			}
-		System.out.println(obj + " " + isItem(obj));
 		return obj;
 
 		}		
 	
-	/**
-	 * Removes the tail if an ITEM has not been eaten else adds a tail
-	 */
+	
 	public void updateSnake(boolean obj) {
 		int x = snakeBody.getLast().getX();
 		int y = snakeBody.getLast().getY();
-		System.out.println(x + " " + y);
 		if (!obj) {
 			cells[x][y].setCellType(Cell.CellType.EMPTY);
 			snakeBody.removeLast();
