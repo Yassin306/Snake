@@ -96,6 +96,14 @@ public class Board extends JPanel {
 		return this.snakeBody.getFirst();
 	}
 	/**
+	 * @return the head of the snake
+	 * 
+	 */
+	public Snake getTail() {
+		return this.snakeBody.getLast();
+	}
+	
+	/**
 	 * @return the direction
 	 */
 	public Direction getDirection() {
