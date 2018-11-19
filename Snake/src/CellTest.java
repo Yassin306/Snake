@@ -3,6 +3,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+
 /**
  * 
  */
@@ -55,7 +56,16 @@ class CellTest {
 	 */
 	@Test
 	void testSetCellType() {
-		fail("Not yet implemented");
+		empty.setCellType(Cell.CellType.SMALL_ITEM);
+		assertTrue(30 == empty.getScore());
+		empty.setCellType(Cell.CellType.BIG_ITEM);
+		assertTrue(100 == empty.getScore());
+		empty.setCellType(Cell.CellType.MED_ITEM);
+		assertTrue(50 == empty.getScore());
+		empty.setCellType(Cell.CellType.SNAKE);
+		assertTrue(0 == empty.getScore());
+		wall.setCellType(Cell.CellType.EMPTY);
+		assertTrue(10 == wall.getScore());
 	}
 
 	/**
