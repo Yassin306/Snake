@@ -17,6 +17,13 @@ public class Cell {
 	 * Sets the type of the cell and gives a score based on the type
 	 */
 	public Cell(CellType cellType) {
+		setCellType(cellType);
+	}
+
+	/**
+	 * @param cellType the cellType to set
+	 */
+	public void setCellType(CellType cellType) {
 		this.cellType = cellType;
 		switch (cellType) {
 		case EMPTY:
@@ -35,13 +42,6 @@ public class Cell {
 			this.score=0;
 			break;
 		}
-	}
-
-	/**
-	 * @param cellType the cellType to set
-	 */
-	public void setCellType(CellType cellType) {
-		this.cellType = cellType;
 	}
 
 	/**
