@@ -48,7 +48,26 @@ public class Cell {
 	 * @param score the score to set
 	 */
 	public void setScore(int score) {
+		switch (score) {
+		case 0:
+			this.cellType = CellType.WALL;		
+			break;
+		case 30:
+			this.cellType = CellType.SMALL_ITEM;
+			break;
+		case 50:
+			this.cellType = CellType.MED_ITEM;
+			break;
+		case 100:
+			this.cellType = CellType.BIG_ITEM;
+			break;	
+		default:
+			this.cellType = CellType.EMPTY;
+			score = 10;
+			break;
+		}
 		this.score = score;
+
 	}
 
 	/**
