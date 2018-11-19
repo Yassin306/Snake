@@ -124,10 +124,17 @@ class CellTest {
 
 	/**
 	 * Test method for {@link Cell#getCellType()}.
+	 * Black case test
+	 * Testing getCellType test case
 	 */
 	@Test
 	void testGetCellType() {
-		fail("Not yet implemented");
+		assertEquals(Cell.CellType.WALL, wall.getCellType());
+		assertEquals(Cell.CellType.SNAKE, snake.getCellType());
+		assertEquals(Cell.CellType.MED_ITEM, med.getCellType());
+		assertEquals(Cell.CellType.BIG_ITEM, big.getCellType());
+		assertEquals(Cell.CellType.SMALL_ITEM, small.getCellType());
+		assertEquals(Cell.CellType.EMPTY, empty.getCellType());
 	}
 
 }
