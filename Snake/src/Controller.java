@@ -27,6 +27,7 @@ public class Controller extends JFrame implements KeyListener {
 	
 	
 	public Controller() {
+		  direction = Direction.UP;
 		  add(getbAceptar());
 		  //inicializador();
 	}

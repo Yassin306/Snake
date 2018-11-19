@@ -1,4 +1,6 @@
+import java.awt.BorderLayout;
 import java.util.Scanner;
+import javax.swing.JFrame;
 
 /**
  * 
@@ -8,7 +10,7 @@ import java.util.Scanner;
  * @author 
  *
  */
-public class Game {
+public class Game extends JFrame {
 	private Board board;
 	private int rowSize;
 	private int colSize;
@@ -18,25 +20,43 @@ public class Game {
 	private long startTime;
 	private long finishTime;
 	
-	public Game(int rowSize, int colSize) {
+	public Game(int rowSize, int colSize) throws InterruptedException {
 		this.rowSize = rowSize;
 		this.colSize = colSize;
 		start();
+		
+		
 	}
 	
 	/**
 	 * Game start
+	 * @throws InterruptedException 
 	 */
-	public void start() {
+	public void start() throws InterruptedException {
 		board = new Board(rowSize, colSize);
 		board.setHead((int) (rowSize/2), (int) (colSize/2));
 		NewObjective();
 		startTime = System.currentTimeMillis();
+		
+		setLayout(new BorderLayout());
+		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setResizable(false);
+		
+		add(board, BorderLayout.CENTER);
+		
+		setSize(board.getColSize() * 20, board.getRowSize() * 20);
+		setLocationRelativeTo(null);
+		setVisible(true);
+		
 		play(con.getDirection());
 	}
 	
-	public void play(Controller.Direction direction) {
+	public void play(Controller.Direction direction) throws InterruptedException {
 		do {
+			Thread.sleep(1000);
+					
+			board.repaint();
+						
 			CheckObjective(direction);
 			
 			board.move(direction);
@@ -56,7 +76,7 @@ public class Game {
 		boolean collision = false;
 		switch (direction) {
 		case UP:
-			if (board.getCell(pos_X, pos_Y - 1) == Cell.CellType.WALL) {
+			if (board.getCell(pos_X, pos_Y - 1) != Cell.CellType.WALL) {
 				collision = true;
 			}
 			break;

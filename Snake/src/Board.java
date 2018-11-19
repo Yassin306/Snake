@@ -1,5 +1,9 @@
 import java.util.Iterator;
+import javax.swing.JPanel;
 import java.util.LinkedList;
+import java.awt.Graphics;
+import java.awt.Color;
+import java.awt.Dimension;
 
 /**
  * 
@@ -9,7 +13,7 @@ import java.util.LinkedList;
  * @author 
  *
  */
-public class Board {
+public class Board extends JPanel {
 	private int rowSize;
 	private int colSize;
 	private Cell[][] cells;
@@ -32,6 +36,9 @@ public class Board {
 					cells[i][j] = new Cell(Cell.CellType.EMPTY);
 			}
 		}
+		
+		setPreferredSize(new Dimension(this.colSize * 20, this.rowSize * 20));
+		setBackground(Color.BLACK);
 
 	}
 	/**
@@ -135,18 +142,23 @@ public class Board {
 			Snake snake = iterator.next();
 			x = snake.getX();
 			y = snake.getY();
+			System.out.println(x + " + " + y);
 			switch (direction) {
 			case UP:
 				snake.setPos(x, y-1);
+				cells[x][y-1].setCellType(Cell.CellType.SNAKE);
 				break;
 			case DOWN:
 				snake.setPos(x, y+1);
+				cells[x][y+1].setCellType(Cell.CellType.SNAKE);
 				break;
 			case LEFT:
 				snake.setPos(x-1, y);
+				cells[x-1][y].setCellType(Cell.CellType.SNAKE);
 				break;
 			case RIGHT:
 				snake.setPos(x+1, y);
+				cells[x+1][y].setCellType(Cell.CellType.SNAKE);
 				break;
 			}
 
@@ -158,6 +170,57 @@ public class Board {
 		int y = snakeBody.getLast().getY();
 		cells[x][y].setCellType(Cell.CellType.EMPTY);
 	}
+	
+	@Override
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		
+		for(int x = 0; x < colSize; x++) {
+			for(int y = 0; y < rowSize; y++) {
+				Cell.CellType cell = cells[x][y].getCellType();			
+				drawCell(x * 20, y * 20, cell, g);
+			}
+		}
+		
+		g.setColor(Color.DARK_GRAY);
+		g.drawRect(0, 0, getWidth() - 1, getHeight());
+		for(int x = 0; x < colSize; x++) {
+			for(int y = 0; y < rowSize; y++) {
+				g.drawLine(x * 20, 0, x * 20, getHeight());
+				g.drawLine(0, y * 20, getWidth(), y * 20);
+			}
+		}
+	}
+	
+	public void drawCell(int x, int y, Cell.CellType cellType, Graphics g) {
+		
+		
+		switch(cellType) {
+		case EMPTY: 
+			g.setColor(Color.BLACK);
+			g.fillRect(x, y, 20, 20);
+			break;
+		case WALL:
+			g.setColor(Color.GRAY);
+			g.fillRect(x, y, 20, 20);
+			break;
+		case SNAKE:
+			g.setColor(Color.GREEN);
+			g.fillRect(x, y, 20, 20);
+			break;
+		case SMALL_ITEM:
+			g.setColor(Color.RED);
+			g.fillRect(x, y, 20, 20);
+			break;
+		case MED_ITEM:
+			g.setColor(Color.BLUE);
+			g.fillRect(x, y, 20, 20);
+			break;
+		case BIG_ITEM:
+			g.setColor(Color.YELLOW);
+			g.fillRect(x, y, 20, 20);
+			break;
+	}
 
 	
-}
+} }
