@@ -9,7 +9,7 @@
 public class Cell {
 	private int score;
 	public enum CellType{
-		ITEM,WALL,EMPTY,SNAKE
+		SMALL_ITEM, MED_ITEM, BIG_ITEM, WALL, EMPTY, SNAKE
 	}
 	private CellType cellType;
 	
@@ -18,11 +18,22 @@ public class Cell {
 	 */
 	public Cell(CellType cellType) {
 		this.cellType = cellType;
-		if (this.cellType == CellType.ITEM) {
-			this.score = 100;
-		}
-		else {
-			this.score = 0;
+		switch (cellType) {
+		case EMPTY:
+			this.score=10;			
+			break;
+		case SMALL_ITEM:
+			this.score=30;			
+			break;
+		case MED_ITEM:
+			this.score=50;			
+			break;
+		case BIG_ITEM:
+			this.score=100;			
+			break;	
+		default:
+			this.score=0;
+			break;
 		}
 	}
 
