@@ -174,11 +174,28 @@ class BoardTest {
 	}
 
 	/**
-	 * Test method for {@link Board#update()}.
+	 * Test method for {@link Board#updateSnake()}.
+	 * White Case Test: Decision Coverage
 	 */
 	@Test
-	void testUpdate() {
-		fail("Not yet implemented");
+	void testUpdateSnake() {
+		
+		board.setHead(2, 2);
+		int x = board.getTail().getX();
+		int y = board.getTail().getY();
+		board.setDirection(Board.Direction.DOWN);
+		board.move();
+		board.updateSnake(false);
+		assertEquals(board.getCell(x, y), Cell.CellType.EMPTY);
+		
+		board.setDirection(Board.Direction.UP);
+		x = board.getTail().getX();
+		y = board.getTail().getY();
+		board.move();
+		board.move();
+		board.updateSnake(true);
+		assertEquals(board.getCell(x, y), Cell.CellType.SNAKE);
+		
 	}
 
 }

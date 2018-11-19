@@ -77,7 +77,7 @@ public class Game extends JFrame implements KeyListener {
 			if (obj) {
 				NewObjective();
 			}
-			board.update_snake(obj);
+			board.updateSnake(obj);
 			
 		} while(cell != Cell.CellType.WALL && cell != Cell.CellType.SNAKE);
 		GameOver();
