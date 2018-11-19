@@ -108,40 +108,7 @@ public class Board extends JPanel {
 	public void setDirection(Direction direction) {
 		this.direction = direction;
 	}
-	/**
-	 * Add one more member to the body of the snake
-	 * 
-	 */
-	public void addBody(Board.Direction direction) {		
-		int pos_x = this.snakeBody.getLast().getX();
-		int pos_y = this.snakeBody.getLast().getY();
-		Snake e;
-		switch (direction) {
-		case UP:
-			e = new Snake(pos_x, pos_y + 1);
-			this.snakeBody.addLast(e);
-			cells[pos_x][pos_y + 1].setCellType(Cell.CellType.SNAKE);
-			break;
-		case DOWN:
-			e = new Snake(pos_x, pos_y - 1);
-			this.snakeBody.addLast(e);
-			cells[pos_x][pos_y - 1].setCellType(Cell.CellType.SNAKE);
-			break;
-		case LEFT:
-			e = new Snake(pos_x + 1, pos_y);
-			this.snakeBody.addLast(e);
-			cells[pos_x + 1][pos_y].setCellType(Cell.CellType.SNAKE);
-			break;
-		case RIGHT:
-			e = new Snake(pos_x - 1, pos_y);
-			this.snakeBody.addLast(e);
-			cells[pos_x - 1][pos_y].setCellType(Cell.CellType.SNAKE);
-			break;
-		}
-		
-	}
 	
-
 	/**
 	 * sets the type of the cell
 	 */
