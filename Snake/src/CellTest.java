@@ -78,7 +78,28 @@ class CellTest {
 	 */
 	@Test
 	void testSetScore() {
-		fail("Not yet implemented");
+		
+		empty.setScore(30);
+		assertEquals(Cell.CellType.SMALL_ITEM, empty.getCellType());
+		assertTrue(30 == empty.getScore());
+		empty.setScore(100);
+		assertEquals(Cell.CellType.BIG_ITEM, empty.getCellType());
+		assertTrue(100 == empty.getScore());
+		empty.setScore(50);
+		assertEquals(Cell.CellType.MED_ITEM, empty.getCellType());
+		assertTrue(50 == empty.getScore());
+		empty.setScore(0);
+		assertEquals(Cell.CellType.WALL, empty.getCellType());
+		assertTrue(0 == empty.getScore());
+		
+		int[] emptyValues = {-50, -1, 1, 9, 10, 11, 29, 31, 49, 51, 99, 101, 5, 20, 40, 80 ,150};
+		for (int i = 0; i < emptyValues.length; i++) {
+			empty.setScore(emptyValues[i]);
+			assertEquals(Cell.CellType.EMPTY, empty.getCellType());
+			assertTrue(10 == empty.getScore());
+			empty.setCellType(Cell.CellType.SMALL_ITEM);
+			
+		}
 	}
 
 	/**
