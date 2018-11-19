@@ -13,12 +13,7 @@ public class Snake {
 	 * 
 	 */
 	public Snake(int x, int y) {
-		if(x<0 || y<0) {
-			x=0;
-			y=0;
-		}
-		this.x = x;
-		this.y = y;
+		setPos(x, y);
 	}
 	/**
 	 * @return the x
@@ -37,6 +32,10 @@ public class Snake {
 	 * @param y the y to set
 	 */
 	public void setPos(int x, int y) {
+		if(x<0 || y<0) {
+			x=0;
+			y=0;
+		}
 		this.x = x;
 		this.y = y;
 	}
