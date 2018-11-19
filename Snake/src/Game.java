@@ -30,7 +30,7 @@ public class Game {
 	public void start() {
 		board = new Board(rowSize, colSize);
 		board.setHead((int) (rowSize/2), (int) (colSize/2));
-		board.setCells((int)(Math.random() * rowSize), (int)(Math.random() * colSize), Cell.CellType.ITEM);
+		NewObjective();
 		startTime = System.currentTimeMillis();
 		play(con.getDirection());
 	}
@@ -89,28 +89,28 @@ public class Game {
 		int pos_Y = board.getHead().getY();
 		switch (direction) {
 		case UP:
-			if (board.getCell(pos_X, pos_Y - 1) == Cell.CellType.ITEM) {
+			if (board.isItem(pos_X, pos_Y - 1)) {
 				board.addBody(direction);
 				NewObjective();
 				score.addScore(OBJECTIVE_SCORE);
 			}
 			break;
 		case DOWN:
-			if (board.getCell(pos_X, pos_Y + 1) == Cell.CellType.ITEM) {
+			if (board.isItem(pos_X, pos_Y + 1)) {
 				board.addBody(direction);
 				NewObjective();
 				score.addScore(OBJECTIVE_SCORE);
 			}
 			break;
 		case LEFT:
-			if (board.getCell(pos_X - 1, pos_Y) == Cell.CellType.ITEM) {
+			if (board.isItem(pos_X - 1, pos_Y)) {
 				board.addBody(direction);
 				NewObjective();
 				score.addScore(OBJECTIVE_SCORE);
 			}
 			break;
 		case RIGHT:
-			if (board.getCell(pos_X + 1, pos_Y) == Cell.CellType.ITEM) {
+			if (board.isItem(pos_X + 1, pos_Y)) {
 				board.addBody(direction);
 				NewObjective();
 				score.addScore(OBJECTIVE_SCORE);
@@ -126,13 +126,34 @@ public class Game {
 	public void NewObjective() {
 		int pos_x = (int)(Math.random() * rowSize);
 		int pos_y = (int)(Math.random() * colSize);
-		if (board.getCell(pos_x, pos_y) != Cell.CellType.SNAKE) {
-			board.setCells(pos_x, pos_y, Cell.CellType.ITEM);
+		if (board.getCell(pos_x, pos_y) != Cell.CellType.SNAKE
+				|| board.getCell(pos_x, pos_y) != Cell.CellType.WALL) {
+			board.setCells(pos_x, pos_y, randomItem());
 		} else {
 			NewObjective();
 		}
 	}
 	
+	/**
+	 * create a new Objective
+	 * @return 
+	 * 
+	 */
+	public Cell.CellType randomItem() {
+		int Random = (int)(Math.random()*4);
+		if (Random == 0) {
+			return Cell.CellType.BIG_ITEM;
+		} else if (Random == 1) {
+			return Cell.CellType.MED_ITEM;
+		} else {
+			return Cell.CellType.SMALL_ITEM;
+		}
+	}
+	
+	/**
+	 * GameOver Screen
+	 * 
+	 */
 	public void GameOver() {
 		String userName;
 		long Time = finishTime - startTime;
