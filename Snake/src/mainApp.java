@@ -42,12 +42,6 @@ public class mainApp {
 	}
 
 	/**
-	 * @param option the option to set
-	 */
-	public static void setOption(int option) {
-		mainApp.option = option;
-	}
-	/**
 	 * @param game the game to set
 	 */
 	public static void setGame(Game game) {
