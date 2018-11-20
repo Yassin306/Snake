@@ -1,5 +1,7 @@
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.ByteArrayInputStream;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -17,6 +19,10 @@ class GameTest {
 	public class MockBoard extends Board {
 		public MockBoard(int rowSize, int colSize) {
 			super(rowSize, colSize);
+		}
+		@Override
+		public void repaint() {
+			
 		}
 	}
 	
@@ -71,13 +77,49 @@ class GameTest {
 	 */
 	@Test
 	void testPlay() {
-		mock = new MockBoard(20, 20);
+		String input;
 		game = new Game(20, 20);
 		game.setBoard(mock);
-		//no looping
+		//no loops
+		game = new Game(20, 20);
+		mock = new MockBoard(20, 20);
+		mock.setHead((int) (20/2), (int) (20/2));
 		mock.setCells(mock.getHead().getX(), mock.getHead().getY() - 1, Cell.CellType.WALL);
+		game.setBoard(mock);
+		input = "Marc";
+		System.setIn(new ByteArrayInputStream(input.getBytes()));
+		game.play(Board.Direction.UP);
+		assertEquals(0, game.getScore());
+		//1 loops
+		game = new Game(20, 20);
+		mock = new MockBoard(20, 20);
+		mock.setHead((int) (20/2), (int) (20/2));
+		mock.setCells(mock.getHead().getX(), mock.getHead().getY() - 2, Cell.CellType.WALL);
+		game.setBoard(mock);
+		input = "Marc";
+		System.setIn(new ByteArrayInputStream(input.getBytes()));
 		game.play(Board.Direction.UP);
 		assertEquals(10, game.getScore());
+		//2 loops
+		game = new Game(20, 20);
+		mock = new MockBoard(20, 20);
+		mock.setHead((int) (20/2), (int) (20/2));
+		mock.setCells(mock.getHead().getX(), mock.getHead().getY() - 3, Cell.CellType.WALL);
+		game.setBoard(mock);
+		input = "Marc";
+		System.setIn(new ByteArrayInputStream(input.getBytes()));
+		game.play(Board.Direction.UP);
+		assertEquals(20, game.getScore());
+		//5 loops
+		game = new Game(20, 20);
+		mock = new MockBoard(20, 20);
+		mock.setHead((int) (20/2), (int) (20/2));
+		mock.setCells(mock.getHead().getX(), mock.getHead().getY() - 6, Cell.CellType.WALL);
+		game.setBoard(mock);
+		input = "Marc";
+		System.setIn(new ByteArrayInputStream(input.getBytes()));
+		game.play(Board.Direction.UP);
+		assertEquals(50, game.getScore());
 		
 	}
 
