@@ -69,10 +69,28 @@ class GameTest {
 
 	/**
 	 * Test method for {@link Game#addScore(Cell.CellType)}.
+	 * White case
 	 */
 	@Test
 	void testAddScore() {
-		fail("Not yet implemented");
+		game = new Game(20, 20);
+		game.addScore(Cell.CellType.EMPTY);
+		assertEquals(10, game.getScore());
+		game = new Game(20, 20);
+		game.addScore(Cell.CellType.SMALL_ITEM);
+		assertEquals(30, game.getScore());
+		game = new Game(20, 20);
+		game.addScore(Cell.CellType.MED_ITEM);
+		assertEquals(50, game.getScore());
+		game = new Game(20, 20);
+		game.addScore(Cell.CellType.BIG_ITEM);
+		assertEquals(100, game.getScore());
+		game = new Game(20, 20);
+		game.addScore(Cell.CellType.SNAKE);
+		assertEquals(0, game.getScore());
+		game = new Game(20, 20);
+		game.addScore(Cell.CellType.WALL);
+		assertEquals(0, game.getScore());
 	}
 
 	/**
