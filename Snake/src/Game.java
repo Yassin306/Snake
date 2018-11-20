@@ -288,4 +288,12 @@ public class Game extends JFrame implements KeyListener {
 	public int getCol() {
 		return colSize;
 	}
+	
+	/**
+	 * set a new board
+	 * @param board
+	 */
+	public void setBoard (Board board) {
+		this.board = board;
+	}
 }

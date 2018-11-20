@@ -13,6 +13,14 @@ import org.junit.jupiter.api.Test;
  */
 class GameTest {
 	Game game;
+	
+	public class MockBoard extends Board {
+		public MockBoard(int rowSize, int colSize) {
+			super(rowSize, colSize);
+		}
+	}
+	
+	MockBoard mock;
 
 	/**
 	 * @throws java.lang.Exception
@@ -63,7 +71,13 @@ class GameTest {
 	 */
 	@Test
 	void testPlay() {
+		mock = new MockBoard(20, 20);
 		game = new Game(20, 20);
+		game.setBoard(mock);
+		//no looping
+		mock.setCells(mock.getHead().getX(), mock.getHead().getY() - 1, Cell.CellType.WALL);
+		game.play(Board.Direction.UP);
+		assertEquals(10, game.getScore());
 		
 	}
 
