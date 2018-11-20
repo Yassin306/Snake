@@ -5,6 +5,8 @@ import java.io.ByteArrayInputStream;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import com.sun.glass.events.KeyEvent;
+
 /**
  * 
  */
@@ -66,10 +68,15 @@ class GameTest {
 
 	/**
 	 * Test method for {@link Game#start()}.
+	 * Test if method ends
 	 */
 	@Test
 	void testStart() {
-		fail("Not yet implemented");
+		game = new Game(10,10);
+		String input = "Marc";
+		System.setIn(new ByteArrayInputStream(input.getBytes()));
+		game.start();
+		assertTrue(true);
 	}
 
 	/**
@@ -150,27 +157,26 @@ class GameTest {
 	}
 
 	/**
-	 * Test method for {@link Game#CheckCollision(Board.Direction)}.
-	 */
-	@Test
-	void testCheckCollision() {
-		fail("Not yet implemented");
-	}
-
-	/**
-	 * Test method for {@link Game#CheckObjective(Board.Direction)}.
-	 */
-	@Test
-	void testCheckObjective() {
-		fail("Not yet implemented");
-	}
-
-	/**
 	 * Test method for {@link Game#NewObjective()}.
 	 */
 	@Test
 	void testNewObjective() {
-		fail("Not yet implemented");
+		game = new Game(20,20);
+		mock = new MockBoard(20,20);
+		mock.setHead((int) (20/2), (int) (20/2));
+		game.setBoard(mock);
+		game.NewObjective();
+		boolean obj = false;
+		for(int i = 0; i < 20; i++) {
+			for(int j = 0; j < 20; j++) {
+				if (mock.getCell(i, j) == Cell.CellType.BIG_ITEM 
+						|| mock.getCell(i,j) == Cell.CellType.MED_ITEM
+						|| mock.getCell(i, j) == Cell.CellType.SMALL_ITEM) {
+					obj = true;
+				}
+			}
+		}
+		assertTrue(obj);
 	}
 
 	/**
@@ -178,7 +184,15 @@ class GameTest {
 	 */
 	@Test
 	void testRandomItem() {
-		fail("Not yet implemented");
+		game = new Game(20, 20);
+		mock = new MockBoard(20,20);
+		Cell.CellType a;
+		a = game.randomItem();
+		assertTrue(mock.isItem(a));
+		a = game.randomItem();
+		assertTrue(mock.isItem(a));
+		a = game.randomItem();
+		assertTrue(mock.isItem(a));
 	}
 
 	/**
@@ -186,7 +200,11 @@ class GameTest {
 	 */
 	@Test
 	void testGameOver() {
-		fail("Not yet implemented");
+		game = new Game(20, 20);
+		String input = "Marc";
+		System.setIn(new ByteArrayInputStream(input.getBytes()));
+		game.GameOver();
+		assertEquals("Marc", game.getName());
 	}
 
 	/**
@@ -195,6 +213,7 @@ class GameTest {
 	@Test
 	void testKeyPressed() {
 		fail("Not yet implemented");
+		
 	}
 
 	/**
