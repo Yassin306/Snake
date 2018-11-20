@@ -1,14 +1,14 @@
 import java.util.Scanner;
 
 public class mainApp {
+	static Game game = new Game(20, 20);
+	static Ranking rank = new Ranking(game);
+	static boolean salir = false;
+	static int option = 0;
+	static Scanner sc;
 
 	public static void main(String[] args) throws InterruptedException {
 		// TODO Auto-generated method stub
-	Game game = new Game(20, 20);
-	Ranking rank = new Ranking(game);
-	boolean salir = false;
-	int option = 0;
-	Scanner sc = new Scanner(System.in);
 			
 		do {
 			System.out.println("Tria una d'aquestes opcions");
@@ -16,9 +16,8 @@ public class mainApp {
 			System.out.println("2 - Ranking");
 			System.out.println("3 - Sortir");
 		
-			
+			sc = new Scanner(System.in);
 			option = sc.nextInt();
-			
 			switch(option) {
 			case(1): {
 				game.start();
@@ -40,5 +39,18 @@ public class mainApp {
 			}
 		
 		}while (!salir);
+	}
+
+	/**
+	 * @param option the option to set
+	 */
+	public static void setOption(int option) {
+		mainApp.option = option;
+	}
+	/**
+	 * @param game the game to set
+	 */
+	public static void setGame(Game game) {
+		mainApp.game = game;
 	}
 }
