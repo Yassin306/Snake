@@ -273,4 +273,12 @@ public class Game extends JFrame implements KeyListener {
 	public String getName() {
 		return score.getUserName();
 	}
+	
+	public int getRow() {
+		return rowSize;
+	}
+	
+	public int getCol() {
+		return colSize;
+	}
 }
