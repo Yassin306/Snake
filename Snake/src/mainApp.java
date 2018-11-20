@@ -10,35 +10,35 @@ public class mainApp {
 	int option = 0;
 	Scanner sc = new Scanner(System.in);
 			
-	do {
-		System.out.println("Tria una d'aquestes opcions");
-		System.out.println("1 - Jugar");
-		System.out.println("2 - Ranking");
-		System.out.println("3 - Sortir");
-
+		do {
+			System.out.println("Tria una d'aquestes opcions");
+			System.out.println("1 - Jugar");
+			System.out.println("2 - Ranking");
+			System.out.println("3 - Sortir");
 		
-		option = sc.nextInt();
+			
+			option = sc.nextInt();
+			
+			switch(option) {
+			case(1): {
+				game.start();
+				rank.Write(game);
+				break;
+			}
+			case(2): {
+				rank.Read();
+				game = new Game(20, 20);
+				break;
+			}
+			case(3): {
+				salir = true;
+				break;
+			}
+			default:
+				System.out.println("Nombre incorrecte");
+			
+			}
 		
-		switch(option) {
-		case(1): {
-			game.start();
-			rank.Write(game);
-			break;
-		}
-		case(2): {
-			rank.Read();
-			game = new Game(20, 20);
-			break;
-		}
-		case(3): {
-			salir = true;
-			break;
-		}
-		default:
-			System.out.println("Nombre incorrecte");
-		
-	}
-
-}while (!salir);
+		}while (!salir);
 	}
 }

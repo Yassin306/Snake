@@ -33,4 +33,26 @@ public class Ranking {
 		}
 	}
 	
+	/**
+	 * @return the score based on index
+	 */
+	public int getScore(int i) {
+		return score.get(i);
+	}
+
+	/**
+	 * @return the duration based on index
+	 */
+	public long getDuration(int i) {
+		return duration.get(i);
+	}
+
+	/**
+	 * @return the name based on index
+	 */
+	public String getName(int i) {
+		return Name.get(i);
+	}
+
+	
 }
