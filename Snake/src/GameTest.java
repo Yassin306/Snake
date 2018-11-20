@@ -23,12 +23,31 @@ class GameTest {
 
 	/**
 	 * Test method for {@link Game#Game(int, int)}.
+	 * Black case test: equivalence partitioning, limit and frontier values
 	 */
 	@Test
 	void testGame() {
+		//valores internos
 		game = new Game(20,20);
 		assertEquals(20, game.getRow());
 		assertEquals(20, game.getCol());
+		game = new Game(25,30);
+		assertEquals(25, game.getRow());
+		assertEquals(30, game.getCol());
+		//valores exteriores
+		game = new Game(55,70);
+		assertEquals(50, game.getRow());
+		assertEquals(50, game.getCol());
+		game = new Game(5,3);
+		assertEquals(10, game.getRow());
+		assertEquals(10, game.getCol());
+		//valores limites
+		game = new Game(50,50);
+		assertEquals(50, game.getRow());
+		assertEquals(50, game.getCol());
+		game = new Game(10,10);
+		assertEquals(10, game.getRow());
+		assertEquals(10, game.getCol());
 	}
 
 	/**
@@ -44,7 +63,8 @@ class GameTest {
 	 */
 	@Test
 	void testPlay() {
-		fail("Not yet implemented");
+		game = new Game(20, 20);
+		
 	}
 
 	/**

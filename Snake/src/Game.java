@@ -24,6 +24,16 @@ public class Game extends JFrame implements KeyListener {
 	private JButton bAceptar;
 	
 	public Game(int rowSize, int colSize) {
+		if (rowSize <= 10) {
+			rowSize = 10;
+		} else if (rowSize >= 50){
+			rowSize = 50;
+		} 
+		if (colSize <= 10) {
+			colSize = 10;
+		} else if (colSize >= 50){
+			colSize = 50;
+		} 
 		this.rowSize = rowSize;
 		this.colSize = colSize;
 		add(getbAceptar());		
@@ -66,10 +76,7 @@ public class Game extends JFrame implements KeyListener {
 				e.printStackTrace();
 			}
 							
-			board.repaint();
-			
-			
-										
+			board.repaint();										
 			
 			cell = board.move();
 			obj = board.isItem(cell);
