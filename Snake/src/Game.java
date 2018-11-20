@@ -112,47 +112,6 @@ public class Game extends JFrame implements KeyListener {
 	}
 	
 	/**
-	 * @return if the snake has collided or not
-	 */
-	public boolean CheckCollision(Board.Direction direction) {
-		int pos_X = board.getHead().getX();
-		int pos_Y = board.getHead().getY();
-		boolean collision = false;
-		switch (direction) {
-		case UP:
-			if (board.getCell(pos_X, pos_Y - 1) != Cell.CellType.WALL) {
-				collision = true;
-			}
-			break;
-		case DOWN:
-			if (board.getCell(pos_X, pos_Y + 1) != Cell.CellType.WALL) {
-				collision = true;
-			}
-			break;
-		case LEFT:
-			if (board.getCell(pos_X - 1, pos_Y) != Cell.CellType.WALL) {
-				collision = true;
-			}
-			break;
-		case RIGHT:
-			if (board.getCell(pos_X + 1, pos_Y) != Cell.CellType.WALL) {
-				collision = true;
-			}
-			break;
-		}
-		
-		return collision;
-	}
-	
-	/**
-	 * look if the snake has collected the objective
-	 * and create a new Objective
-	 */
-	public boolean CheckObjective(Board.Direction direction) {
-		return false;
-	}
-	
-	/**
 	 * create a new Objective
 	 * 
 	 */
